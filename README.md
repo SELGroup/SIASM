@@ -1,6 +1,6 @@
 # SIASM
 ## Paper
-"**Adversarial Socialbots Modeling Based on Structural Information Principles."
+"Adversarial Socialbots Modeling Based on Structural Information Principles."
 
 ## Specification of dependencies
 - Python version ``3.8``
