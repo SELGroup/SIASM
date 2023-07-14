@@ -1,9 +1,6 @@
-# ACORN
+# SIASM
 ## Paper
-"**Socialbots on Fire: Modeling Adversarial Behaviors of Socialbots via Multi-Agent Hierarchical Reinforcement Lear**ning.", Web Conference (WWW) 2022. [arxiv](https://arxiv.org/abs/2110.10655)
-
-Many of utils codes are credited to https://dl.acm.org/doi/10.5555/3398761.3398831 at https://github.com/kage08/graph_sample_rl
-Many of the current codes are in very raw forms. Please use with caution.
+"**Adversarial Socialbots Modeling Based on Structural Information Principles."
 
 ## Specification of dependencies
 - Python version ``3.8``
@@ -38,7 +35,7 @@ config = {
     "WALK_P":1, # parameter p of node2vec
     "WALK_Q":50, # parameter q of node2vec
     "model_type":"CONV", 
-    "node_embed_dim":6, # node embedding dimension of node2vec
+    "node_embed_dim":42, # node embedding dimension of node2vec
     "num_filters":8, # number of filters for CONV
     "validation_graphs":[],
     "reward_shaping":None, 
@@ -49,7 +46,8 @@ config = {
     "entropy_coeff":0.01, # ppo parameter
     "training_iteration":10000, # number of training iterations
     "checkpoint_freq":5, # frequency of saving checkpoints during training
-    "wandb_key":"" #wandb API (replace with your own)
+    "wandb_key":"" #wandb API (replace with your own),
+    "sip": True
 }
 
 config_test = {
@@ -61,41 +59,7 @@ config_test = {
 
 ## Train
 RUN: ``python ppo_single_large_hiar.py train``
-Example of Statistics on Synthetic Graphs. 
-![Statistics on Synthetic Graphs](https://raw.githubusercontent.com/lethaiq/ACORN/main/resources/synthetic.png?token=ADJNWYT7SR4MDZULGAGCUHDAXUWJQ)
 
 
-## Test from Pre-trained Model
-- The checkpoint ``./checkpoint_best/checkpoint-150`` is the best checkpoint, **result of which is resulted in the paper.**  
-- To reproduce the reuslts, run: ``python ppo_single_large_hiar.py test ./checkpoint_best/checkpoint-150`` for ``ACORN`` and ``python ppo_single_large_hiar.py greedy ./checkpoint_best/checkpoint-150`` for ``AgentI+H`` baseline. Please change the configuration in the ``ppo_single_large_hiar.py`` file for testing with specific parameters such as ``p`` (network actionvation probability), ``custom_max_length`` (maximum time horizon T), etc.
-
-- Example outputs:
-```
-...
-GRAPH: ./database/_hoaxy36.pkl
-updating INTERVAL to  20
-EVALUATING REAL GRPAH... 1500
-[Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done   2 out of   2 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=2)]: Done   2 out of   2 | elapsed:    0.0s finished
-EVALUATING REAL GRPAH... 1500
-[Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
-[Parallel(n_jobs=2)]: Done   2 out of   2 | elapsed:    0.0s remaining:    0.0s
-[Parallel(n_jobs=2)]: Done   2 out of   2 | elapsed:    0.0s finished
-DONE HERE 120 120
-out_degree [1 3 2 1 1] 120
-Action Sequence (First 10, Last 10): MAMMRTMMRA MAMMRMAMMR
-Number of Interaction: 124
-Reward: 1.002000250031254
-...
-```
-
-## Citation
-```
-@article{acorn2022,
-    title={Socialbots on Fire: Modeling Adversarial Behaviors of Socialbots via Multi-Agent Hierarchical Reinforcement Learning},
-    author={Thai Le and Long-Thanh Tran and Dongwon Lee},
-    year={2022},
-    journal={Proceedings of the 31st ACM Web Conference 2022 (WWW'20)},
-}
-```
+## Test from Pre-trained Model  
+- To reproduce the reuslts, run: ``python ppo_single_large_hiar.py test ./checkpoint_best/checkpoint`` for ``SIASM`` and ``python ppo_single_large_hiar.py greedy ./checkpoint_best/checkpoint`` for ``SIASM-H`` baseline. 
